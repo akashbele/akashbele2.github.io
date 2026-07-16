@@ -1,112 +1,81 @@
-// ===============================
-// Premium Portfolio Script
-// ===============================
+/* =====================================================
+   AKASH BELE PORTFOLIO
+===================================================== */
 
+// ==========================
 // Typing Animation
-const typing = document.getElementById("typing");
+// ==========================
 
 const words = [
     "Java Backend Developer",
     "Spring Boot Developer",
-    "Microservices Developer",
-    "AWS Cloud Developer",
+    "Microservices Engineer",
+    "AWS Cloud Engineer",
     "Spring AI Developer",
     "Generative AI Enthusiast"
 ];
 
-let wordIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
+const typing = document.getElementById("typing");
 
-function typeEffect() {
+let word = 0;
+let letter = 0;
+let deleting = false;
+
+function type() {
 
     if (!typing) return;
 
-    const currentWord = words[wordIndex];
+    let current = words[word];
 
-    if (isDeleting) {
-        typing.textContent = currentWord.substring(0, charIndex--);
-    } else {
-        typing.textContent = currentWord.substring(0, charIndex++);
-    }
+    if (!deleting) {
 
-    let speed = isDeleting ? 60 : 120;
+        typing.innerHTML =
+            current.substring(0, letter++) +
+            "<span class='cursor'>|</span>";
 
-    if (!isDeleting && charIndex > currentWord.length) {
-        isDeleting = true;
-        speed = 1500;
-    }
-
-    if (isDeleting && charIndex < 0) {
-        isDeleting = false;
-        wordIndex++;
-
-        if (wordIndex >= words.length) {
-            wordIndex = 0;
+        if (letter > current.length) {
+            deleting = true;
+            setTimeout(type, 1500);
+            return;
         }
 
-        speed = 300;
+    } else {
+
+        typing.innerHTML =
+            current.substring(0, letter--) +
+            "<span class='cursor'>|</span>";
+
+        if (letter < 0) {
+            deleting = false;
+            word = (word + 1) % words.length;
+            letter = 0;
+        }
+
     }
 
-    setTimeout(typeEffect, speed);
+    setTimeout(type, deleting ? 40 : 90);
+
 }
 
-typeEffect();
+type();
 
 
-// ===============================
+// ==========================
 // Sticky Header
-// ===============================
+// ==========================
 
 const header = document.querySelector("header");
 
 window.addEventListener("scroll", () => {
 
-    if (!header) return;
-
-    if (window.scrollY > 50) {
-
-        header.style.background = "rgba(5,8,22,.95)";
-        header.style.boxShadow = "0 10px 30px rgba(0,0,0,.35)";
-
-    } else {
-
-        header.style.background = "rgba(5,8,22,.65)";
-        header.style.boxShadow = "none";
-
-    }
+    header.classList.toggle("sticky", window.scrollY > 50);
 
 });
 
 
-// ===============================
-// Smooth Scroll
-// ===============================
-
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-
-    link.addEventListener("click", function (e) {
-
-        e.preventDefault();
-
-        const target = document.querySelector(this.getAttribute("href"));
-
-        if (target) {
-
-            target.scrollIntoView({
-                behavior: "smooth"
-            });
-
-        }
-
-    });
-
-});
-
-
-// ===============================
+// ==========================
 // Active Navigation
-// ===============================
+// ==========================
 
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll("nav a");
@@ -117,13 +86,10 @@ window.addEventListener("scroll", () => {
 
     sections.forEach(section => {
 
-        const sectionTop = section.offsetTop - 120;
+        const top = section.offsetTop - 150;
 
-        if (window.scrollY >= sectionTop) {
-
-            current = section.getAttribute("id");
-
-        }
+        if (scrollY >= top)
+            current = section.id;
 
     });
 
@@ -131,216 +97,249 @@ window.addEventListener("scroll", () => {
 
         link.classList.remove("active");
 
-        if (link.getAttribute("href") === "#" + current) {
-
+        if (link.getAttribute("href") == "#" + current)
             link.classList.add("active");
 
-        }
-
     });
 
 });
 
 
-// ===============================
-// Scroll Reveal Animation
-// ===============================
+// ==========================
+// Smooth Reveal
+// ==========================
 
-const revealElements = document.querySelectorAll(
+const reveal = new IntersectionObserver(entries => {
 
-".about-card,.skill-card,.project-card,.timeline-item,.contact-card"
+    entries.forEach(entry => {
 
-);
+        if (entry.isIntersecting) {
 
-revealElements.forEach(item => {
-
-    item.style.opacity = "0";
-    item.style.transform = "translateY(60px)";
-    item.style.transition = ".8s ease";
-
-});
-
-function revealOnScroll() {
-
-    revealElements.forEach(item => {
-
-        const top = item.getBoundingClientRect().top;
-
-        if (top < window.innerHeight - 100) {
-
-            item.style.opacity = "1";
-            item.style.transform = "translateY(0)";
+            entry.target.classList.add("show");
 
         }
 
     });
 
-}
+}, { threshold: .15 });
 
-window.addEventListener("scroll", revealOnScroll);
+document.querySelectorAll(
+".card,.project-card,.timeline-item,.skills-grid div,.contact-card")
+.forEach(item => {
 
-revealOnScroll();
+    item.classList.add("hidden");
 
-
-// ===============================
-// Hero Counters
-// ===============================
-
-const counters = document.querySelectorAll(".hero-stats h2");
-
-counters.forEach(counter => {
-
-    const target = parseInt(counter.innerText);
-
-    let count = 0;
-
-    function updateCounter() {
-
-        const increment = Math.ceil(target / 50);
-
-        if (count < target) {
-
-            count += increment;
-
-            if (count > target) count = target;
-
-            counter.innerText = count + "+";
-
-            requestAnimationFrame(updateCounter);
-
-        }
-
-    }
-
-    updateCounter();
+    reveal.observe(item);
 
 });
 
 
-// ===============================
-// Floating Profile Image
-// ===============================
+// ==========================
+// Scroll Progress Bar
+// ==========================
 
-const profile = document.querySelector(".image-border");
+const progress = document.createElement("div");
 
-if (profile) {
+progress.id = "progress";
 
-    let direction = 1;
+document.body.appendChild(progress);
 
-    setInterval(() => {
+window.addEventListener("scroll", () => {
 
-        profile.style.transform = `translateY(${direction * 12}px)`;
+    let total =
+        document.documentElement.scrollHeight -
+        window.innerHeight;
 
-        direction *= -1;
+    let percent = (window.scrollY / total) * 100;
 
-    }, 2000);
+    progress.style.width = percent + "%";
 
-}
+});
 
 
-// ===============================
-// Scroll To Top Button
-// ===============================
+// ==========================
+// Back To Top
+// ==========================
 
 const topBtn = document.createElement("button");
 
-topBtn.innerHTML = "↑";
+topBtn.innerHTML = "<i class='fas fa-arrow-up'></i>";
 
 topBtn.id = "topBtn";
 
 document.body.appendChild(topBtn);
 
-topBtn.style.cssText = `
-position:fixed;
-bottom:25px;
-right:25px;
-width:50px;
-height:50px;
-border:none;
-border-radius:50%;
-background:#00bfff;
-color:white;
-font-size:22px;
-cursor:pointer;
-display:none;
-box-shadow:0 10px 20px rgba(0,191,255,.4);
-z-index:999;
-transition:.3s;
-`;
-
-window.addEventListener("scroll", () => {
-
-    if (window.scrollY > 500) {
-
-        topBtn.style.display = "block";
-
-    } else {
-
-        topBtn.style.display = "none";
-
-    }
-
-});
-
-topBtn.addEventListener("click", () => {
+topBtn.onclick = () => {
 
     window.scrollTo({
 
-        top: 0,
-        behavior: "smooth"
+        top:0,
+
+        behavior:"smooth"
 
     });
 
+};
+
+window.addEventListener("scroll",()=>{
+
+    topBtn.classList.toggle("showTop",window.scrollY>400);
+
 });
 
 
-// ===============================
-// Mouse Glow Effect
-// ===============================
+// ==========================
+// Tilt Cards
+// ==========================
 
-const glow = document.createElement("div");
+document.querySelectorAll(".project-card").forEach(card=>{
 
-glow.style.cssText = `
-position:fixed;
-width:25px;
-height:25px;
-background:#00bfff;
-border-radius:50%;
-filter:blur(15px);
-pointer-events:none;
-opacity:.6;
-z-index:9999;
-`;
+card.addEventListener("mousemove",(e)=>{
+
+const rect=card.getBoundingClientRect();
+
+const x=e.clientX-rect.left;
+
+const y=e.clientY-rect.top;
+
+const rotateX=((y-rect.height/2)/12);
+
+const rotateY=((rect.width/2-x)/12);
+
+card.style.transform=
+
+`perspective(1000px)
+ rotateX(${rotateX}deg)
+ rotateY(${rotateY}deg)
+ scale(1.04)`;
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+card.style.transform=
+
+"perspective(1000px) rotateX(0) rotateY(0) scale(1)";
+
+});
+
+});
+
+
+// ==========================
+// Hero Floating Animation
+// ==========================
+
+const profile=document.querySelector(".profile-card");
+
+if(profile){
+
+setInterval(()=>{
+
+profile.classList.toggle("float");
+
+},2500);
+
+}
+
+
+// ==========================
+// Mouse Glow
+// ==========================
+
+const glow=document.createElement("div");
+
+glow.className="mouseGlow";
 
 document.body.appendChild(glow);
 
-document.addEventListener("mousemove", (e) => {
+document.addEventListener("mousemove",(e)=>{
 
-    glow.style.left = e.clientX - 12 + "px";
-    glow.style.top = e.clientY - 12 + "px";
+glow.style.left=e.clientX+"px";
+
+glow.style.top=e.clientY+"px";
 
 });
 
 
-// ===============================
-// Navbar Active Class Style
-// ===============================
+// ==========================
+// Counter Animation
+// ==========================
 
-const style = document.createElement("style");
+document.querySelectorAll("[data-count]").forEach(counter=>{
 
-style.innerHTML = `
-nav a.active{
-color:#00bfff;
-font-weight:600;
+const update=()=>{
+
+const target=+counter.dataset.count;
+
+const value=+counter.innerText;
+
+const speed=40;
+
+const inc=Math.ceil(target/speed);
+
+if(value<target){
+
+counter.innerText=value+inc;
+
+requestAnimationFrame(update);
+
+}else{
+
+counter.innerText=target;
+
 }
-`;
 
-document.head.appendChild(style);
+}
+
+update();
+
+});
 
 
-// ===============================
-// Console Message
-// ===============================
+// ==========================
+// Button Ripple
+// ==========================
 
-console.log("%c🚀 Portfolio Developed by Akash Bele",
-"color:#00bfff;font-size:18px;font-weight:bold;");
+document.querySelectorAll(".btn").forEach(btn=>{
+
+btn.addEventListener("click",function(e){
+
+const circle=document.createElement("span");
+
+circle.classList.add("ripple");
+
+const x=e.clientX-this.offsetLeft;
+
+const y=e.clientY-this.offsetTop;
+
+circle.style.left=x+"px";
+
+circle.style.top=y+"px";
+
+this.appendChild(circle);
+
+setTimeout(()=>circle.remove(),600);
+
+});
+
+});
+
+
+// ==========================
+// Preloader
+// ==========================
+
+window.addEventListener("load",()=>{
+
+const loader=document.getElementById("loader");
+
+if(loader){
+
+loader.style.opacity="0";
+
+setTimeout(()=>loader.remove(),500);
+
+}
+
+});
