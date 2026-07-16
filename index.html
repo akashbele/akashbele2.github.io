@@ -1,36 +1,384 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Akash Bele | Java Backend Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;scroll-behavior:smooth}
-body{background:linear-gradient(135deg,#020617,#0f172a,#1e3a8a);color:#fff}
-header{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;padding:18px 8%;backdrop-filter:blur(12px);background:#08111fcc;z-index:10}
-nav a{color:#fff;text-decoration:none;margin:0 14px}nav a:hover{color:#38bdf8}
-.hero{min-height:100vh;display:grid;grid-template-columns:1.2fr 1fr;align-items:center;padding:90px 8%;gap:40px}
-.badge{display:inline-block;background:#38bdf822;border:1px solid #38bdf8;padding:8px 14px;border-radius:30px}
-h1{font-size:64px;background:linear-gradient(90deg,#38bdf8,#a78bfa);-webkit-background-clip:text;color:transparent}
-.type{color:#facc15;font-size:30px;height:36px}
-p{line-height:1.8}
-.btn{display:inline-block;margin:10px 10px 0 0;padding:14px 26px;border-radius:30px;text-decoration:none;color:#fff;background:#0ea5e9}
-.btn.alt{background:transparent;border:2px solid #38bdf8}
-img{width:340px;border-radius:50%;border:6px solid #38bdf8;box-shadow:0 0 35px #38bdf8;animation:f 4s ease-in-out infinite}
-@keyframes f{50%{transform:translateY(-12px)}}
-section{padding:80px 8%}h2{text-align:center;margin-bottom:30px;color:#38bdf8}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{background:#ffffff12;border:1px solid #ffffff22;border-radius:18px;padding:22px;backdrop-filter:blur(12px);transition:.3s}
-.card:hover{transform:translateY(-8px) scale(1.02)}
-footer{text-align:center;padding:25px;background:#020617}
-</style></head><body>
-<header><div><b>Akash Bele</b></div><nav><a href=#about>About</a><a href=#skills>Skills</a><a href=#projects>Projects</a><a href=#contact>Contact</a></nav></header>
-<section class=hero><div><span class=badge>🚀 Available for Java Backend Roles</span><h1>Akash Bele</h1><div class=type id=t></div><p>Java Backend Developer building scalable Spring Boot microservices, cloud-native systems and AI-powered applications.</p><a class=btn href=#projects>View Projects</a><a class='btn alt' href='assets/resume.pdf' download>Download Resume</a></div><div><img src='assets/profile.jpg'></div></section>
-<section id=about><h2>About</h2><div class=card>Experienced in Java, Spring Boot, Hibernate, Kafka, AWS, Docker, Kubernetes, Spring AI, OpenAI and enterprise REST APIs.</div></section>
-<section id=skills><h2>Skills</h2><div class=cards><div class=card>☕ Java</div><div class=card>🍃 Spring Boot</div><div class=card>🔐 Spring Security</div><div class=card>☁ AWS</div><div class=card>🐳 Docker</div><div class=card>⚙ Kubernetes</div><div class=card>🤖 Spring AI</div><div class=card>🧠 OpenAI</div></div></section>
-<section id=projects><h2>Featured Projects</h2><div class=cards><div class=card><h3>MyMart AI</h3><p>AI shopping assistant using Spring AI & Pinecone.</p></div><div class=card><h3>Internet Banking</h3><p>Secure banking platform with JWT and microservices.</p></div><div class=card><h3>College ERP</h3><p>Enterprise management application in Spring Boot.</p></div></div></section>
-<section id=contact><h2>Contact</h2><div class=card>Email: <a href='mailto:Akashbele2000@gmail.com'>Akashbele2000@gmail.com</a><br>Phone: <a href='tel:+919309175730'>+91 9309175730</a><br>LinkedIn: linkedin.com/in/akash-bele1</div></section>
-<footer>© 2026 Akash Bele • Crafted with HTML, CSS & JavaScript</footer>
-<script>
-const words=["Java Backend Developer","Spring Boot Expert","Microservices Developer","AI Enthusiast"];
-let i=0,j=0,d=true;const e=document.getElementById('t');
-setInterval(()=>{let w=words[i];e.textContent=w.slice(0,j);if(d){j++;if(j>w.length)d=false}else{j--;if(j<0){d=true;i=(i+1)%words.length;j=0}}},120);
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Akash Bele | Java Backend Developer</title>
+
+    <meta name="description"
+        content="Akash Bele - Java Backend Developer | Spring Boot | Microservices | AWS | Spring AI | Generative AI">
+
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header>
+
+        <div class="logo">
+
+            <img src="assets/favicon.png" alt="Logo">
+
+            <span>Akash Bele</span>
+
+        </div>
+
+        <nav>
+
+            <a href="#home">Home</a>
+
+            <a href="#about">About</a>
+
+            <a href="#skills">Skills</a>
+
+            <a href="#experience">Experience</a>
+
+            <a href="#projects">Projects</a>
+
+            <a href="#contact">Contact</a>
+
+        </nav>
+
+    </header>
+
+    <!-- ================= HERO ================= -->
+
+    <section id="home" class="hero">
+
+        <div class="hero-left">
+
+            <h3>Hello 👋 I'm</h3>
+
+            <h1>Akash Bele</h1>
+
+            <h2 id="typing"></h2>
+
+            <p>
+
+                Passionate Java Backend Developer with 3+ years of experience
+                in building scalable enterprise applications using Spring Boot,
+                Microservices, AWS, Docker, Kubernetes and Spring AI.
+
+            </p>
+
+            <div class="buttons">
+
+                <a href="#projects" class="btn">
+                    View Projects
+                </a>
+
+                <a href="assets/resume.pdf" class="btn secondary">
+                    Download Resume
+                </a>
+
+            </div>
+
+            <div class="socials">
+
+                <a href="#"><i class="fab fa-github"></i></a>
+
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+
+                <a href="#"><i class="fa-solid fa-envelope"></i></a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <div class="profile-card">
+
+                <img src="assets/profile.jpg" alt="Akash Bele">
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+
+    <section id="about">
+
+        <h2 class="section-title">About Me</h2>
+
+        <div class="card">
+
+            <p>
+
+                I am a Java Backend Developer specializing in Spring Boot,
+                Microservices, Hibernate, REST APIs, AWS Cloud, Docker,
+                Kubernetes and AI integrations using Spring AI, OpenAI and
+                LangChain4j.
+
+            </p>
+
+            <p>
+
+                I enjoy solving backend challenges, designing scalable systems,
+                optimizing performance, and developing secure enterprise
+                applications.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+
+    <section id="skills">
+
+        <h2 class="section-title">Technical Skills</h2>
+
+        <div class="skills-grid">
+
+            <div>Java</div>
+
+            <div>Spring Boot</div>
+
+            <div>Spring MVC</div>
+
+            <div>Hibernate</div>
+
+            <div>Spring Security</div>
+
+            <div>Microservices</div>
+
+            <div>REST API</div>
+
+            <div>Kafka</div>
+
+            <div>Docker</div>
+
+            <div>Kubernetes</div>
+
+            <div>AWS</div>
+
+            <div>Jenkins</div>
+
+            <div>Git</div>
+
+            <div>MySQL</div>
+
+            <div>Oracle</div>
+
+            <div>MongoDB</div>
+
+            <div>Spring AI</div>
+
+            <div>OpenAI</div>
+
+            <div>LangChain4j</div>
+
+            <div>Pinecone</div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+
+    <section id="experience">
+
+        <h2 class="section-title">Experience</h2>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+
+                <h3>Java Backend Developer</h3>
+
+                <h4>Tanama Software Pvt. Ltd.</h4>
+
+                <span>Dec 2022 – Present</span>
+
+                <ul>
+
+                    <li>Developed enterprise microservices using Spring Boot.</li>
+
+                    <li>Implemented JWT Authentication & Spring Security.</li>
+
+                    <li>Built RESTful APIs for banking and ERP applications.</li>
+
+                    <li>Integrated Spring AI and OpenAI services.</li>
+
+                    <li>Containerized applications using Docker & Kubernetes.</li>
+
+                    <li>Created CI/CD pipelines using Jenkins.</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+
+    <section id="projects">
+
+        <h2 class="section-title">Projects</h2>
+
+        <div class="project-container">
+
+            <div class="project-card">
+
+                <i class="fa-solid fa-robot"></i>
+
+                <h3>MyMart AI</h3>
+
+                <p>
+
+                    AI powered e-commerce application using Spring Boot,
+                    Spring AI, OpenAI and Pinecone.
+
+                </p>
+
+            </div>
+
+            <div class="project-card">
+
+                <i class="fa-solid fa-building-columns"></i>
+
+                <h3>Internet Banking Portal</h3>
+
+                <p>
+
+                    Banking application built with Spring Boot,
+                    JWT Security and Microservices Architecture.
+
+                </p>
+
+            </div>
+
+            <div class="project-card">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <h3>College ERP</h3>
+
+                <p>
+
+                    Enterprise Resource Planning System using Java,
+                    Spring Boot and MySQL.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+
+    <section id="contact">
+
+        <h2 class="section-title">Let's Connect</h2>
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <h3>Email</h3>
+
+                <p>
+
+                    <a href="mailto:Akashbele2000@gmail.com">
+                        Akashbele2000@gmail.com
+                    </a>
+
+                </p>
+
+            </div>
+
+            <div class="contact-card">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <h3>Phone</h3>
+
+                <p>
+
+                    <a href="tel:+919309175730">
+                        +91 9309175730
+                    </a>
+
+                </p>
+
+            </div>
+
+            <div class="contact-card">
+
+                <i class="fab fa-linkedin"></i>
+
+                <h3>LinkedIn</h3>
+
+                <p>
+
+                    <a href="#">
+                        linkedin.com/in/akash-bele1
+                    </a>
+
+                </p>
+
+            </div>
+
+            <div class="contact-card">
+
+                <i class="fab fa-github"></i>
+
+                <h3>GitHub</h3>
+
+                <p>
+
+                    <a href="#">
+                        github.com/akashbele
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+
+            © 2026 Akash Bele • Java Backend Developer
+
+        </p>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
