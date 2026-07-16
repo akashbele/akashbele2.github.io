@@ -68,7 +68,7 @@ Portfolio/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/portfolio.git
+git clone https://github.com/akashbele/akashbele2.github.io.git
 ```
 
 ### 2. Open Project
